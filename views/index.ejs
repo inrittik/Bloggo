@@ -7,6 +7,15 @@
     <%- include('./partials/navbar.ejs') %>
     <div class="content">
         <h2>Your Blogs</h2>
+
+        <% if(blogs.length > 0){ %>
+            <% blogs.forEach(blog => { %>
+                <h3 class="title"><%= blog.title %></h3>
+                <p class="snippet"><%= blog.snippet %></p>
+            <% }) %>
+        <% }else{ %>
+            <p>There are no blogs to display</p>
+        <% } %>
     </div>
 </body>
 </html>

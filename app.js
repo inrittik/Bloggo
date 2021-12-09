@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
@@ -10,49 +11,26 @@ mongoose.connect(dbURI)
 
 
 app.set('view engine', 'ejs');
+ 
+app.use(express.static('public'));
 
-
-app.get('/add-blog', (req, res)=> {
-    const blog = new Blog({
-        title: 'new blog 2',
-        snippet: 'about my new blog',
-        body: 'body of my new blog'
-    });
-
-    blog.save()
-      .then((result) => {
-          res.send(result);
-      })
-      .catch((err) => {
-          console.log(err);
-      });
-});
-
-app.get('/all-blogs', (req, res) => {
-    Blog.find()
+app.get('/blogs', (req, res) => {
+    Blog.find().sort({ createdAt: -1 })
       .then(result => {
-          res.send(result);
+        res.render('index', { title: 'All Blogs', blogs: result})  
       })
       .catch((err) => {
           console.log(err);
       })
 })
-// app.use((req, res, next) => {
-//     console.log(req.hostname);
-//     console.log(req.path);
-//     console.log(req.method);
-//     next();
-// })
-
-// middleware for static files
-app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.render('index', { title : 'Home'});
+    res.redirect('/blogs');
 })
 app.get('/about', (req, res) => {
     res.render('about', { title : 'About'});
 })
+
 app.get('/create/blog', (req, res) => {
     res.render('create', { title : 'Create Blog'});
 })
