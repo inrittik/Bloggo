@@ -1,4 +1,4 @@
-const { response } = require('express');
+const { render } = require('ejs');
 const express = require('express');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
@@ -11,8 +11,13 @@ mongoose.connect(dbURI)
 
 
 app.set('view engine', 'ejs');
+app.use(express.static('public')); 
+app.use(express.urlencoded({extended:true})); 
  
-app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.redirect('/blogs');
+})
 
 app.get('/blogs', (req, res) => {
     Blog.find().sort({ createdAt: -1 })
@@ -24,13 +29,32 @@ app.get('/blogs', (req, res) => {
       })
 })
 
-app.get('/', (req, res) => {
-    res.redirect('/blogs');
+app.post('/blogs', (req, res)=> {
+    const blog = new Blog(req.body);
+    blog.save()
+      .then((result)=> {
+        res.redirect('/blogs');
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
 })
+
 app.get('/about', (req, res) => {
     res.render('about', { title : 'About'});
 })
 
 app.get('/create/blog', (req, res) => {
-    res.render('create', { title : 'Create Blog'});
+    res.render('create', {title: 'Create Blog'})
+})
+
+app.get('/blogs/:id', (req, res)=> {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then(result => {
+      res.render('details', {blog : result, title: "Blog Details"});
+    })
+    .catch(err=> {
+      console.log(err);
+    })
 })
