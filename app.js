@@ -55,7 +55,7 @@ app.get('/blogs/:id', (req, res)=> {
       res.render('details', {blog : result, title: "Blog Details"});
     })
     .catch(err=> {
-      console.log(err);
+      res.render('404', {title: 'Error'});
     })
 })
 
@@ -68,4 +68,8 @@ app.delete('/blogs/:id', (req, res)=> {
     .catch(err => {
       console.log(err);
     })
+})
+
+app.use((req, res) => {
+  res.render('404', {title: 'Error'});
 })

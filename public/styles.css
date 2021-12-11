@@ -102,3 +102,18 @@ textarea{
   font-size: 1.2em;
   cursor: pointer;
 }
+
+.error{
+  width: 60%;
+  margin: 50px auto;
+  text-align: center;
+  background-color: rgb(235, 187, 187);
+  height: 30vh;
+  padding: 90px 0;
+  border-radius: 10px;
+}
+.error span{
+  font-size: 48px;
+  margin: 0;
+  color: crimson;
+}
