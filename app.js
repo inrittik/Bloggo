@@ -30,6 +30,8 @@ app.get('/blogs', (req, res) => {
 })
 
 app.post('/blogs', (req, res)=> {
+    let date = new Date();
+    req.body['dateOfCreation'] = date.toDateString(); 
     const blog = new Blog(req.body);
     blog.save()
       .then((result)=> {

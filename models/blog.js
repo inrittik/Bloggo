@@ -15,6 +15,10 @@ const blogSchema = new Schema({
     body: {
         type: String,
         required: true
+    },
+    dateOfCreation: {
+        type: String,
+        required: true
     }
 }, {timestamps: true});
 
