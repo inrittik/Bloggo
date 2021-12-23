@@ -1,71 +1,175 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
-body{
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap");
+body {
   max-width: 1200px;
   margin: 20px auto;
   padding: 0 20px;
   font-family: 'Noto Serif', serif;
   max-width: 1200px;
 }
-p, h1, h2, h3, a, ul{
+
+p, h1, h2, h3, a, ul {
   margin: 0;
   padding: 0;
   text-decoration: none;
   color: #222;
 }
+
 /* nav & footer styles */
-nav{
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-bottom: 60px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
   text-transform: uppercase;
 }
-nav ul{
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
-nav li{
+
+nav ul li {
   list-style-type: none;
   margin-left: 20px;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: color 150px ease-in-out;
+  transition: color 150px ease-in-out;
+  color: #777;
 }
-nav h1{
+
+nav ul li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  z-index: -1;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+nav ul li:hover::before {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+nav ul li:hover a {
+  color: white;
+}
+
+nav ul a {
+  font-size: 1.4rem;
+}
+
+nav .site-title h1 {
+  position: relative;
+  display: inline-block;
   font-size: 3em;
+  color: crimson;
+  z-index: 1;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
 }
-nav p, nav a{
+
+nav .site-title h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: crimson;
+  z-index: -1;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+nav .site-title h1:hover::before {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+nav .site-title h1:hover {
+  color: white;
+}
+
+nav p, nav a {
   color: #777;
   font-weight: 300;
 }
-footer{
+
+nav p {
+  text-align: center;
+}
+
+footer {
   color: #777;
   text-align: center;
   margin: 80px auto 20px;
 }
-h2{
+
+h2 {
   margin-bottom: 40px;
 }
-h3{
+
+h3 {
   text-transform: capitalize;
   margin-bottom: 8px;
 }
-.content{
+
+.content {
   margin-left: 20px;
 }
-.blogs a{
+
+.blogs a {
   display: block;
   margin: 30px 0;
   padding-left: 30px;
   border-left: 6px solid crimson;
 }
-.blogs a:hover h3{
+
+.blogs a h3 {
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+}
+
+.blogs a:hover h3 {
   color: crimson;
 }
-.single{
+
+.single {
   display: inline-block;
   width: 80%;
 }
-.date{
+
+.date {
   display: inline-block;
   position: relative;
   bottom: 20px;
@@ -73,39 +177,48 @@ h3{
   padding: 10px;
   font-weight: 600;
 }
-.details{
+
+.details {
   position: relative;
 }
-.delete{
+
+.delete {
   position: absolute;
-  top:40px;
+  top: 40px;
   right: 40px;
   border-radius: 50%;
   padding: 8px;
 }
-.delete:hover{
+
+.delete:hover {
   cursor: pointer;
-  box-shadow: 1px 2px 3px grey;
+  -webkit-box-shadow: 1px 2px 3px grey;
+          box-shadow: 1px 2px 3px grey;
 }
-.create-blog form{
+
+.create-blog form {
   max-width: 400px;
   margin: 0 auto;
 }
+
 .create-blog input,
-.create-blog textarea{
+.create-blog textarea {
   display: block;
   width: 100%;
   margin: 10px 0;
   padding: 8px;
 }
-.create-blog label{
+
+.create-blog label {
   display: block;
   margin-top: 24px;
 }
-textarea{
+
+textarea {
   height: 120px;
 }
-.create-blog button{
+
+.create-blog button {
   margin-top: 20px;
   background: crimson;
   color: white;
@@ -115,17 +228,19 @@ textarea{
   cursor: pointer;
 }
 
-.error{
+.error {
   width: 60%;
   margin: 50px auto;
   text-align: center;
-  background-color: rgb(235, 187, 187);
+  background-color: #ebbbbb;
   height: 30vh;
   padding: 90px 0;
   border-radius: 10px;
 }
-.error span{
+
+.error span {
   font-size: 48px;
   margin: 0;
   color: crimson;
 }
+/*# sourceMappingURL=styles.css.map */
