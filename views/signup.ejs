@@ -2,6 +2,29 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %>
   <body>
-    <h1>Signup Page</h1>
+    <%- include('./partials/navbar.ejs') %>
+
+    <form class="auth">
+      <h2>Sign Up</h2>
+      <label for="email">Email</label>
+      <input type="text" name="email" required />
+      <div class="email error"></div>
+      <label for="password">Password</label>
+      <input type="password" name="password" required />
+      <div class="password error"></div>
+      <button>Sign Up</button>
+    </form>
+
+    <script>
+      const form = document.querySelector(".auth");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(email, password);
+      });
+    </script>
   </body>
 </html>
