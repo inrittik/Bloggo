@@ -185,8 +185,14 @@ textarea {
 }
 
 .error {
-  width: 60%;
+  max-width: 30vw;
   color: crimson;
+  display: flex;
+  position: relative;
+  left: 50px;
+  bottom: 20px;
+  font-size: 14px;
+  margin: 0;
 }
 .pge-error {
   width: 60%;

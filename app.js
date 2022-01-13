@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Blog = require("./models/blog");
 const authRoutes = require("./routes/auth-routes");
+const cookieParser = require("cookie-parser");
+
 const app = express();
 
 const dbURI =
@@ -17,6 +19,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.redirect("/blogs");

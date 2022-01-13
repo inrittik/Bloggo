@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 
 //handle singup error
 const handleError = (err) => {
@@ -18,6 +19,16 @@ const handleError = (err) => {
   return errors;
 };
 
+// token validaity period
+const validityPeriod = 3 * 24 * 60 * 60;
+
+// create a jwt token
+const createToken = (id) => {
+  return jwt.sign({ id }, "bloggo-secret-signing-key", {
+    expiresIn: validityPeriod,
+  });
+};
+
 const signup_get = (req, res) => {
   res.render("signup", { title: "Signup" });
 };
@@ -29,11 +40,15 @@ const signup_post = async (req, res) => {
 
   try {
     const user = await User.create({ email, password });
-    res.status(201).json(user);
+    // create token after user is created
+    const token = createToken(user._id);
+    // place token inside a cookie
+    res.cookie("jwt", token, { httpOnly: true, maxAge: validityPeriod * 1000 });
+    res.status(201).json({ user: user._id });
   } catch (err) {
     // res.status(400);
     const errors = handleError(err);
-    res.status(400).json(errors);
+    res.status(400).json({ errors });
   }
   // res.send("new user");
 };
