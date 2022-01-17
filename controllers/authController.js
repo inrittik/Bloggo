@@ -35,6 +35,7 @@ const signup_get = (req, res) => {
 const login_get = (req, res) => {
   res.render("login", { title: "Login" });
 };
+
 const signup_post = async (req, res) => {
   const { email, password } = req.body;
 
@@ -52,9 +53,16 @@ const signup_post = async (req, res) => {
   }
   // res.send("new user");
 };
-const login_post = (req, res) => {
-  res.send(req.body);
-  // res.send("logged in");
+
+const login_post = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.login(email, password);
+    res.json({ user });
+  } catch (err) {
+    res.status(404).json({});
+    console.log(err);
+  }
 };
 
 module.exports = {
