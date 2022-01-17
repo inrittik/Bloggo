@@ -1,10 +1,16 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const { handle } = require("express/lib/router");
 
-//handle singup error
+//handle singup/login error
 const handleError = (err) => {
   let errors = { email: "", password: "" };
-  // console.log(err.message);
+  // invalid credentials
+  if (err.message === "Invalid credentials") {
+    errors.password = "Invalid credentials";
+  }
+
+  // signup errors
   if (err.code === 11000) {
     errors.email = "Email is already in use. Please use a different email";
     return errors;
@@ -58,10 +64,12 @@ const login_post = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: validityPeriod * 1000 });
     res.json({ user });
   } catch (err) {
-    res.status(404).json({});
-    console.log(err);
+    const errors = handleError(err);
+    res.status(400).json({ errors });
   }
 };
 
