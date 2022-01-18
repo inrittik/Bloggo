@@ -272,11 +272,13 @@ textarea {
   max-width: 400px;
   border-radius: 10px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #666565;
 }
 
 .auth h2 {
   font-weight: 500;
   font-size: 34px;
+  color: #5a5959;
 }
 
 .auth input[type="text"] {
@@ -302,7 +304,7 @@ textarea {
 
 .auth button {
   font-size: 20px;
-  margin: 40px 0;
+  margin: 30px 0;
   background-color: rgba(216, 81, 108, 0.842);
   color: white;
   border-radius: 15px;
@@ -314,5 +316,14 @@ textarea {
 .auth button :hover {
   -webkit-box-shadow: 4px 4px 10px black;
           box-shadow: 4px 4px 10px black;
+}
+
+.auth a {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.auth a :hover {
+  color: rgba(100, 100, 100, 0.767);
 }
 /*# sourceMappingURL=styles.css.map */
