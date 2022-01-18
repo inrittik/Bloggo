@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Blog = require("./models/blog");
 const authRoutes = require("./routes/auth-routes");
 const cookieParser = require("cookie-parser");
+const { authorize } = require("./middleware/authMiddleware");
 
 const app = express();
 
@@ -55,7 +56,7 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
-app.get("/create/blog", (req, res) => {
+app.get("/create/blog", authorize, (req, res) => {
   res.render("create", { title: "Create Blog" });
 });
 
