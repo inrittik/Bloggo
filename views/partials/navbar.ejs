@@ -5,7 +5,11 @@
   </div>
 
   <ul>
+    <% if(state==true) {%>
+    <li><a href="/logout">Logout</a></li>
+    <% } else{%>
     <li><a href="/login">Login</a></li>
+    <% } %>
     <li><a href="/search">Search</a></li>
     <li><a href="/create/blog">Write new blog</a></li>
   </ul>
