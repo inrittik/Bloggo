@@ -4,12 +4,12 @@ const Blog = require("./models/blog");
 const authRoutes = require("./routes/auth-routes");
 const cookieParser = require("cookie-parser");
 const { authorize, authState } = require("./middleware/authMiddleware");
+require("dotenv").config();
 
 const app = express();
 
 // connect to database
-const dbURI =
-  "mongodb+srv://nritt_ik:Munla%40123@cluster0.2urtv.mongodb.net/mongoTuts?retryWrites=true&w=majority";
+const dbURI = process.env.DB_URI;
 mongoose
   .connect(dbURI)
   .then((result) => app.listen(3000))

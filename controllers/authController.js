@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const { handle } = require("express/lib/router");
 
 //handle singup/login error
 const handleError = (err) => {
@@ -30,7 +29,7 @@ const validityPeriod = 3 * 24 * 60 * 60;
 
 // create a jwt token
 const createToken = (id) => {
-  return jwt.sign({ id }, "bloggo-secret-signing-key", {
+  return jwt.sign({ id }, process.env.TOKEN_SIGNATURE, {
     expiresIn: validityPeriod,
   });
 };

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const authorize = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, "bloggo-secret-signing-key", (err, decodedToken) => {
+    jwt.verify(token, process.env.TOKEN_SIGNATURE, (err, decodedToken) => {
       if (err) {
         res.redirect("/login");
       } else {
@@ -20,7 +20,7 @@ const authorize = (req, res, next) => {
 const authState = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, "bloggo-secret-signing-key", (err, decodedToken) => {
+    jwt.verify(token, process.env.TOKEN_SIGNATURE, (err, decodedToken) => {
       if (err) {
         res.redirect("/logout");
       } else {
